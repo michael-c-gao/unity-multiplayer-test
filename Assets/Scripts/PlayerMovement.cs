@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     PhotonView PV;
     //public GameObject[] gunArray;
     //private Shoot shoot;
+    //swag
 
     //public Image boostBar;
 
