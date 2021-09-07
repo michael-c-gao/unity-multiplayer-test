@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     public bool boostable = true;
     public bool subtractSecond = false;
     public bool powerActive = false;
+    private float rotationSensitivity;
+    public Transform playerRotate;
+    float XRotation = 0f;
     PhotonView PV;
     //public GameObject[] gunArray;
     //private Shoot shoot;
@@ -27,12 +30,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        PV = GetComponent<PhotonView>();
+        //PV = GetComponent<PhotonView>();
+        PV = GetComponentInParent<PhotonView>();
     }
 
     public void Start()
     {
+
         movementSpeed = startSpeed;
+        rotationSensitivity = 125;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        if (!PV.IsMine)
+        {
+            Destroy(GetComponent<Camera>().gameObject);
+        }
     }
 
 
@@ -47,48 +59,72 @@ public class PlayerMovement : MonoBehaviour
         //boostBar.fillAmount = 1;
     }
 
-    void FixedUpdate()
-    {
-        if (!PV.IsMine)
-            return;
 
+    void Look()
+    {
+        float Xaxis = Input.GetAxis("Mouse X") * rotationSensitivity * Time.deltaTime;
+        float Yaxis = Input.GetAxis("Mouse Y") * rotationSensitivity * Time.deltaTime;
+
+        XRotation -= Yaxis;
+        transform.localRotation = Quaternion.Euler(XRotation, 0f, 0f);
+        playerRotate.Rotate(Vector3.up * Xaxis);
+    }
+
+    void Move()
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         float threed = Input.GetAxis("threed");
-        
+
         Vector3 moveVector = (transform.right * horizontal) + (transform.forward * vertical) + (transform.up * threed);
-        
+
         if (Input.GetKey(KeyCode.LeftShift) && boostable)
         {
             movementSpeed = boostSpeed;
             accumulatedBoostTime += Time.deltaTime;
             if (accumulatedBoostTime >= 3f)
-                {
-                    boostable = false;
-                }
-            }
-            else
             {
-
-                //defaultParticle.Play();
-                //boostParticle.Stop();
-                movementSpeed = startSpeed + powerupSpeed;
+                boostable = false;
             }
+        }
+        else
+        {
 
-            
-            if (!boostable && !subtractSecond)
-            {
-                StartCoroutine(boostRecharge());
-                accumulatedBoostTime = 0;
-            }
-            
-            /*if (PlayerAttack.abilityActivated)
-            {
-                StartCoroutine(SpecialPower());
-            }*/
+            //defaultParticle.Play();
+            //boostParticle.Stop();
+            movementSpeed = startSpeed + powerupSpeed;
+        }
 
-            movement = moveVector;
-            CC.Move(moveVector * movementSpeed * Time.deltaTime);
+
+        if (!boostable && !subtractSecond)
+        {
+            StartCoroutine(boostRecharge());
+            accumulatedBoostTime = 0;
+        }
+
+        /*if (PlayerAttack.abilityActivated)
+        {
+            StartCoroutine(SpecialPower());
+        }*/
+
+        movement = moveVector;
+        CC.Move(moveVector * movementSpeed * Time.deltaTime);
+    }
+
+    void Update()
+    {
+        //if (!PV.IsMine)
+        //return;
+        if (!PV.IsMine)
+            return;
+
+        Look();
+        Move();
+        Debug.Log(PhotonNetwork.GetPing());
+        if (Input.GetKey(KeyCode.Z))
+        {
+            Application.Quit();
+        }
         }
     //}
 

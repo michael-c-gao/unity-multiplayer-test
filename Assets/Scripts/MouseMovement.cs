@@ -8,12 +8,12 @@ public class MouseMovement : MonoBehaviour
     private float rotationSensitivity;
     public Transform playerRotate;
     float XRotation = 0f;
-    PhotonView PV;
+    //PhotonView PV;
     //public static bool isPaused = false;
 
     void Awake()
     {
-        PV = GetComponent<PhotonView>();
+        //PV = GetComponent<PhotonView>();
     }
 
 
@@ -25,14 +25,14 @@ public class MouseMovement : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         //if (!GameOver.isGameOver && !Pause.isPaused)
         //{
         //rotationSensitivity = SensSlider.sliderValue;
 
-        if (!PV.IsMine)
-            return;
+        //if (!PV.IsMine)
+            //return;
 
         float Xaxis = Input.GetAxis("Mouse X") * rotationSensitivity * Time.deltaTime;
         float Yaxis = Input.GetAxis("Mouse Y") * rotationSensitivity * Time.deltaTime;
