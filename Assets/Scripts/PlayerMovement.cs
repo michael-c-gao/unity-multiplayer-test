@@ -14,13 +14,11 @@ public class PlayerMovement : MonoBehaviour
     float XRotation = 0f;
     PhotonView PV;
 
-
-    //public Vector3 movement;
-
     void Awake()
     {
         PV = GetComponent<PhotonView>();
     }
+
 
     public void Start()
     {
@@ -29,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         rotationSensitivity = 125.0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
@@ -53,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveVector = (transform.right * horizontal) + (transform.forward * vertical) + (transform.up * threed);
 
-        //movement = moveVector;
         CC.Move(moveVector * movementSpeed * Time.deltaTime);
     }
 
@@ -61,11 +59,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
-        else if (PV.IsMine)
-        {
+        //else if (PV.IsMine)
+        //{
             Look();
             Move();
-        }
+        //}
     }
 
 
