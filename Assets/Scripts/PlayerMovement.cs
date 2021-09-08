@@ -34,7 +34,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Look()
+
+
+        void Look()
     {
         float Xaxis = Input.GetAxis("Mouse X") * rotationSensitivity * Time.deltaTime;
         float Yaxis = Input.GetAxis("Mouse Y") * rotationSensitivity * Time.deltaTime;
