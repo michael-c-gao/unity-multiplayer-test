@@ -93,15 +93,15 @@ public class Gun : MonoBehaviourPunCallbacks
 
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            weaponSwap(0);
+            setWeapon(currWeapon, 0, 0);
         }
         else if (Input.GetKey(KeyCode.Alpha2))
         {
-            weaponSwap(1);
+            setWeapon(currWeapon, 0,1);
         }
         else if (Input.GetKey(KeyCode.Alpha3))
         {
-            weaponSwap(2);
+            setWeapon(currWeapon, 0,2);
         }
     }
 
