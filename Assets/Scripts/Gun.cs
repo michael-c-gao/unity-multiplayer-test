@@ -8,13 +8,10 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class Gun : MonoBehaviourPunCallbacks
 {
     public GameObject[] weapons;
-
     public int minIndex = 0;
     public int maxIndex;
     public static int currWeapon;
     PhotonView PV;
-    public bool a = false;
-    public bool b = false;
 
 
     void Start()
@@ -31,7 +28,6 @@ public class Gun : MonoBehaviourPunCallbacks
 
     void setWeapon(int index, int one, int setIndex)
     {
-
         weapons[currWeapon].SetActive(false);
         if (currWeapon != index)
         {
@@ -43,14 +39,12 @@ public class Gun : MonoBehaviourPunCallbacks
         }
         weapons[currWeapon].SetActive(true);
 
-
         if (PV.IsMine)
         {
             Hashtable hash = new Hashtable();
             hash.Add("currWeapon", currWeapon);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-
     }
 
     void weaponSwap(int swap)
@@ -67,9 +61,7 @@ public class Gun : MonoBehaviourPunCallbacks
     {
         if(!PV.IsMine && targetPlayer == PV.Owner)
         {
-
             weaponSwap((int)changedProps["currWeapon"]);
-
         }
     }
     
@@ -81,14 +73,10 @@ public class Gun : MonoBehaviourPunCallbacks
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             setWeapon(maxIndex, 1, 0);
-            a = true;
-            b = false;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             setWeapon(minIndex, -1, maxIndex);
-            a = false;
-            b = true;
         }
 
         if (Input.GetKey(KeyCode.Alpha1))

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3362052990134111538}
   - component: {fileID: 293115244189870300}
   - component: {fileID: 1566960041238603778}
+  - component: {fileID: 3438061661072951847}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -95,6 +96,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3438061661072951847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615668785053056234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f90e024be7b7b41a502c2732001ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  Damage: 0
+  fireRate: 15
+  tracerRound: {fileID: 0}
+  gunBarrel: {fileID: 0}
+  impact: {fileID: 674270525804472147, guid: d009d377ad325394f805202e60afa515, type: 3}
+  attackParticle: {fileID: 0}
 --- !u!1 &5363851377764606642
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +127,7 @@ GameObject:
   - component: {fileID: 7532046391661176921}
   - component: {fileID: 2144206874662907021}
   - component: {fileID: 1211448094751782719}
+  - component: {fileID: 6399302759917385522}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -190,6 +211,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6399302759917385522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5363851377764606642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f90e024be7b7b41a502c2732001ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  Damage: 0
+  fireRate: 15
+  tracerRound: {fileID: 0}
+  gunBarrel: {fileID: 0}
+  impact: {fileID: 674270525804472147, guid: d009d377ad325394f805202e60afa515, type: 3}
+  attackParticle: {fileID: 0}
 --- !u!1 &6977267468909457973
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,8 +360,6 @@ MonoBehaviour:
   - {fileID: 8815670168087214233}
   minIndex: 0
   maxIndex: 0
-  a: 0
-  b: 0
 --- !u!1 &7122846748939991777
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +486,7 @@ GameObject:
   - component: {fileID: 7677119711501023755}
   - component: {fileID: 562457624032668474}
   - component: {fileID: 2289002610465661166}
+  - component: {fileID: 7230385925861533003}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -532,3 +571,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &7230385925861533003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8815670168087214233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f90e024be7b7b41a502c2732001ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 7122846748939991790}
+  Damage: 10
+  fireRate: 15
+  tracerRound: {fileID: 0}
+  gunBarrel: {fileID: 0}
+  impact: {fileID: 674270525804472147, guid: d009d377ad325394f805202e60afa515, type: 3}
+  attackParticle: {fileID: 0}
