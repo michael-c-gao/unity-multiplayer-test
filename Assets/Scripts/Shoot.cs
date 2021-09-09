@@ -22,9 +22,13 @@ public class Shoot : MonoBehaviour
 
     private static bool isADS = false;
     private static bool swappedADS = false;
+    PhotonView PV;
 
     //[SerializeField] ParticleSystem attackParticle;
-
+    void Awake()
+    {
+        PV = GetComponentInParent<PhotonView>();
+    }
 
     void shootGun()
     {
@@ -98,6 +102,9 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
+
+        if (!PV.IsMine)
+            return;
         weaponCheck(Gun.currWeapon);
         if (activeWeapon && (Time.time >= nextShot))
         {

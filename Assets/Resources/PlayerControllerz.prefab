@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5185241016881223210}
   m_Father: {fileID: 555714968585329497}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3362052990134111538
 MeshFilter:
@@ -177,7 +177,7 @@ Transform:
   m_Children:
   - {fileID: 3282451519241512122}
   m_Father: {fileID: 555714968585329497}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7532046391661176921
 MeshFilter:
@@ -321,6 +321,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7122846748939991778}
+  - {fileID: 5776529859613188378}
   - {fileID: 8115878092703000870}
   - {fileID: 3036516522653804515}
   - {fileID: 97423197039838855}
@@ -532,6 +533,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7863463710573328638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5776529859613188378}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5776529859613188378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863463710573328638}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 555714968585329497}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8815670168087214233
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +596,7 @@ Transform:
   m_Children:
   - {fileID: 1997490785576457093}
   m_Father: {fileID: 555714968585329497}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7677119711501023755
 MeshFilter:
