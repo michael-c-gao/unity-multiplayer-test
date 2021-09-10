@@ -4,14 +4,14 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Shoot : MonoBehaviour
+public class Shoot : MonoBehaviourPunCallbacks
 {
     public Camera cam;
 
     private float nextShot = 0f;
 
     public static float count = 1;
-    public float Damage;
+    //public float Damage;
     public float fireRate = 15f;
     //public TrailRenderer tracerRound;
     public GameObject gunBarrel;
@@ -23,6 +23,7 @@ public class Shoot : MonoBehaviour
     private static bool isADS = false;
     private static bool swappedADS = false;
     PhotonView PV;
+    public float damage;
 
     //[SerializeField] ParticleSystem attackParticle;
     void Awake()
@@ -36,6 +37,7 @@ public class Shoot : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
         {
+            hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage);
             //var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
             //tracer.AddPosition(gunBarrel.transform.position);
             /*
@@ -118,5 +120,7 @@ public class Shoot : MonoBehaviour
             }
         }
     }
+
+
 
 }

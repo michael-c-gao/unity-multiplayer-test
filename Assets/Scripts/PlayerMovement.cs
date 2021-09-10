@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
 {
     public CharacterController CC;
     public float movementSpeed;
@@ -13,6 +13,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerRotate;
     float XRotation = 0f;
     PhotonView PV;
+    const float maxHealth = 100f;
+    float currentHealth = maxHealth;
+    public GameOver GameOver;
+    public GameOver GameWin;
 
     void Awake()
     {
@@ -67,6 +71,32 @@ public class PlayerMovement : MonoBehaviour
             Move();
         //}
     }
+    public void TakeDamage(float damage)
+    {
+        PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+    }
 
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
+
+
+        if (PV.IsMine)
+        {
+            currentHealth -= damage;
+        }
+        
+        if(currentHealth <= 0)
+        {
+            GameOver.Setup();
+        }
+    }
+
+    /*
+    [PunRPC]
+    void go(float currentHealth)
+    {
+
+    }*/
 
 }
