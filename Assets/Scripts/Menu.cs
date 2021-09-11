@@ -6,7 +6,10 @@ public class Menu : MonoBehaviour
 {
 
     public string menuName;
-     public bool open;
+    public bool open;
+    public int characterSelect;
+    public GameObject[] playerText;
+    int prev = -999;
 
     public void Open()
     {
@@ -19,6 +22,37 @@ public class Menu : MonoBehaviour
     {
         open = false;
         gameObject.SetActive(false);
+    }
+
+    public void click1()
+    {
+        characterSelect = 0;
+        setPlayer();
+        PlayerPrefs.SetInt("character", characterSelect);
+    }
+
+    public void click2()
+    {
+        characterSelect = 1;
+        setPlayer();
+        PlayerPrefs.SetInt("character", characterSelect);
+    }
+
+    public void click3()
+    {
+        characterSelect = 2;
+        setPlayer();
+        PlayerPrefs.SetInt("character", characterSelect);
+    }
+
+    void setPlayer()
+    {
+        if (prev != -999)
+        {
+            playerText[prev].SetActive(false);
+        }
+        prev = characterSelect;
+        playerText[characterSelect].SetActive(true);
     }
 
 

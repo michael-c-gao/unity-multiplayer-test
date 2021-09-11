@@ -7,6 +7,10 @@ using System.IO;
 public class PlayerManager : MonoBehaviour
 {
     PhotonView PV;
+    //public GameObject[] characterLoad;
+    public static int character;
+    string a;
+    Vector3 b;
 
     void Awake()
     {
@@ -15,6 +19,9 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        b = new Vector3(1, 1, 1);
+        character = PlayerPrefs.GetInt("character");
+
         if (PV.IsMine)
         {
             CreateController();
@@ -23,7 +30,9 @@ public class PlayerManager : MonoBehaviour
 
     void CreateController()
     {
+        a = character.ToString();
         Debug.Log("Instantiated Player Controller");
-        PhotonNetwork.Instantiate("PlayerControllerz", Vector3.zero, Quaternion.identity);
+        //PhotonNetwork.Instantiate("PlayerControllerz", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate(a, Vector3.zero, Quaternion.identity);
     }
 }
