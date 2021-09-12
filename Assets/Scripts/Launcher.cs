@@ -18,6 +18,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] GameObject PlayerListItemPrefab;
     [SerializeField] GameObject startGameButton;
+    public GameObject[] playerInfo;
+    private int infoLen;
+    private int playerLen;
 
 
     void Awake()
@@ -27,6 +30,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        infoLen = playerInfo.Length;
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -40,6 +44,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
+
         MenuManager.Instance.OpenMenu("title");
         Debug.Log("Joined Lobby");
         PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
@@ -71,15 +76,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         for (int i = 0; i < players.Count(); i++)
         {
             Instantiate(PlayerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+                    Debug.Log(players.Count());
         }
 
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
-
+    /*
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
-    }
+
+    }*/
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -89,6 +94,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
+        for(int i = 0; i < infoLen; i++){
+            if(playerInfo[i].activeSelf){
+                playerInfo[i].SetActive(false);
+            }
+        }
         PhotonNetwork.LeaveRoom();
         MenuManager.Instance.OpenMenu("loading");
     }
@@ -96,6 +106,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         MenuManager.Instance.OpenMenu("title");
+        playerLen = 0;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -129,4 +140,19 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(1);
     }
 
+    void Update(){
+            Player[] playerArray = PhotonNetwork.PlayerList;
+
+            playerLen = playerArray.Count();
+            Debug.Log(playerLen);
+            if(playerLen == 2){
+                        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+            }
+            if(startGameButton.activeSelf){
+                if(playerLen != 2){
+                startGameButton.SetActive(false);
+
+                }
+            }
+    }
 }

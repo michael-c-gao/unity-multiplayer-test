@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour
     public bool open;
     public int characterSelect;
     public GameObject[] playerText;
+    //public GameObject[] swag;
     int prev = -999;
 
     public void Open()
@@ -54,6 +55,7 @@ public class Menu : MonoBehaviour
         prev = characterSelect;
         playerText[characterSelect].SetActive(true);
     }
+
 
 
 }
