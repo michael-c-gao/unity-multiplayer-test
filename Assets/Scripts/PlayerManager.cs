@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public static int character;
     string a;
     Vector3 b;
+    Quaternion rotation;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        b = new Vector3(1, 1, 1);
+        //b = new Vector3(1, 1, 1);
         character = PlayerPrefs.GetInt("character");
 
         if (PV.IsMine)
@@ -33,6 +34,14 @@ public class PlayerManager : MonoBehaviour
         a = character.ToString();
         Debug.Log("Instantiated Player Controller");
         //PhotonNetwork.Instantiate("PlayerControllerz", Vector3.zero, Quaternion.identity);
-        PhotonNetwork.Instantiate(a, Vector3.zero, Quaternion.identity);
+        if(PhotonNetwork.IsMasterClient){
+            b = new Vector3(-2, -2, -2);
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else{
+            b = new Vector3(5, 5, 5);
+            rotation = Quaternion.Euler(0, -180, 0);
+        }
+        PhotonNetwork.Instantiate(a, b, rotation);
     }
 }
