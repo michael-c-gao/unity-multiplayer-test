@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2251419643910128350}
   - component: {fileID: 5210890877090818608}
   - component: {fileID: 4729299382881858299}
+  - component: {fileID: 2767361028976143869}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -112,9 +113,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 4072551744447868826}
   fireRate: 15
+  tracerRound: {fileID: 3800001291295713630, guid: f7a807b5db4097a4a9ce766bf45422ed, type: 3}
   gunBarrel: {fileID: 5818808969462342647}
   impact: {fileID: 5475822146315115615, guid: 589f282c0f5c8c044a4e6b6812366a33, type: 3}
   damage: 30
+--- !u!114 &2767361028976143869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114596099431030422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &484569292638556547
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +678,7 @@ GameObject:
   - component: {fileID: 478209060840543414}
   - component: {fileID: 4916878545268670442}
   - component: {fileID: 2331626477301515564}
+  - component: {fileID: 6767150588559421229}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -752,9 +777,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 4072551744447868826}
   fireRate: 15
+  tracerRound: {fileID: 3800001291295713630, guid: f7a807b5db4097a4a9ce766bf45422ed, type: 3}
   gunBarrel: {fileID: 1866923496032731943}
   impact: {fileID: 5475822146315115615, guid: 589f282c0f5c8c044a4e6b6812366a33, type: 3}
   damage: 10
+--- !u!114 &6767150588559421229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5141722283064940629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5736993834060283607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,6 +1061,7 @@ GameObject:
   - component: {fileID: 431477701190524217}
   - component: {fileID: 39367853095740937}
   - component: {fileID: 3894102039882789465}
+  - component: {fileID: 1539301160588499978}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1111,9 +1160,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 4072551744447868826}
   fireRate: 15
+  tracerRound: {fileID: 3800001291295713630, guid: f7a807b5db4097a4a9ce766bf45422ed, type: 3}
   gunBarrel: {fileID: 9219986910341509183}
   impact: {fileID: 5475822146315115615, guid: 589f282c0f5c8c044a4e6b6812366a33, type: 3}
   damage: 20
+--- !u!114 &1539301160588499978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8791238395474886330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9219986910341509183
 GameObject:
   m_ObjectHideFlags: 0

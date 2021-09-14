@@ -13,7 +13,7 @@ public class Shoot : MonoBehaviourPunCallbacks
     public static float count = 1;
     //public float Damage;
     public float fireRate = 15f;
-    //public TrailRenderer tracerRound;
+    public TrailRenderer tracerRound;
     public GameObject gunBarrel;
 
     public GameObject impact;
@@ -24,20 +24,24 @@ public class Shoot : MonoBehaviourPunCallbacks
     private static bool swappedADS = false;
     PhotonView PV;
     public float damage;
+    PhotonView PV2;
 
     //[SerializeField] ParticleSystem attackParticle;
     void Awake()
     {
         PV = GetComponentInParent<PhotonView>();
+        PV2 = GetComponent<PhotonView>();
     }
 
     void shootGun()
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
         {
             hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage);
+            PV2.RPC("RPC_Shoot", RpcTarget.All, hit.point); 
+
             //var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
             //tracer.AddPosition(gunBarrel.transform.position);
             /*
@@ -101,6 +105,20 @@ public class Shoot : MonoBehaviourPunCallbacks
             swappedADS = false;
         }
     }
+
+    [PunRPC]
+    void RPC_Shoot(Vector3 hit){
+                   var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
+                tracer.AddPosition(gunBarrel.transform.position);
+            
+            tracer.transform.position = hit;
+            GameObject impactMark = Instantiate(impact, hit, Quaternion.LookRotation(hit));
+            Destroy(impactMark, 3f);
+
+    }
+
+
+
 
     void Update()
     {
