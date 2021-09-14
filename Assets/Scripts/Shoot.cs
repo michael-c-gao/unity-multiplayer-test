@@ -52,8 +52,8 @@ public class Shoot : MonoBehaviourPunCallbacks
                 count += 5;
             }*/
             //tracer.transform.position = hit.point;
-            GameObject impactMark = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactMark, 3f);
+            //GameObject impactMark = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(impactMark, 3f);
         }
     }
 
@@ -113,6 +113,7 @@ public class Shoot : MonoBehaviourPunCallbacks
             
             tracer.transform.position = hit;
             GameObject impactMark = Instantiate(impact, hit, Quaternion.LookRotation(hit));
+            Destroy(tracer, 3f);
             Destroy(impactMark, 3f);
 
     }
