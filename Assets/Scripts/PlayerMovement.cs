@@ -13,8 +13,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
     public Transform playerRotate;
     float XRotation = 0f;
     PhotonView PV;
-    const float maxHealth = 100f;
-    float currentHealth = maxHealth;
+    public static float maxHealth;
+    public float healthMax;
+    float currentHealth;
     private Vector3 moveVector;
     public GameOver GameOver;
     public GameOver GameWin;
@@ -23,7 +24,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
     public float cooldown;
     private float lastDashed = -9999f;
     public Image hb;
+        public Image hbx;
     public GameObject ui;
+    public static float sax ;
+    public static float saxx ;
 
     void Awake()
     {
@@ -33,7 +37,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
 
     public void Start()
     {
-
+        maxHealth = healthMax;
+        currentHealth = maxHealth;
         movementSpeed = startSpeed;
         rotationSensitivity = 125.0f;
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,12 +46,14 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
 
         if (!PV.IsMine)
         {
+        sax = currentHealth;
+        saxx = currentHealth;
+
             Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(ui);
         }
+        hbx.fillAmount =1;
     }
-
-
 
         void Look()
     {
@@ -83,9 +90,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
     void Update()
     {
         if (!PV.IsMine)
-            return;
-        //else if (PV.IsMine)
-        //{
+        return;
+        Debug.Log("sax:" + sax);
+        Debug.Log("saxx:" + saxx);
+
+        hbx.fillAmount =sax / saxx;
+
             Look();
             Move();
 
@@ -97,8 +107,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
                 lastDashed = Time.time;
             }
         }
-        //}
     }
+
     public void TakeDamage(float damage)
     {
         PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviourPunCallbacks
 {
@@ -25,12 +26,16 @@ public class Shoot : MonoBehaviourPunCallbacks
     PhotonView PV;
     public float damage;
     PhotonView PV2;
+    //public Image hbx;
+        //private float swag;
 
     //[SerializeField] ParticleSystem attackParticle;
     void Awake()
     {
         PV = GetComponentInParent<PhotonView>();
         PV2 = GetComponent<PhotonView>();
+        //swag = PlayerMovement.sax;
+        //hbx.fillAmount = swag / swag;
     }
 
     void shootGun()
@@ -41,6 +46,20 @@ public class Shoot : MonoBehaviourPunCallbacks
         {
             hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage);
             PV2.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal); 
+            if(hit.collider.gameObject.GetComponent<IDamagable>() != null){
+                PlayerMovement.sax -= damage;
+                //Debug.Log("sax:" + PlayerMovement.sax );
+                //swag -= damage;
+                //hbx.fillAmount = swag / PlayerMovement.sax;
+                //Debug.Log(damage);
+
+            }
+            //Debug.Log(hit.collider.gameObject.GetComponent<IDamagable>());
+
+
+            //if(hit.collider.gameObject.GetComponent<IDamagable>() != null){
+                //Debug.Log("swag");
+            //}
 
             //var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
             //tracer.AddPosition(gunBarrel.transform.position);
