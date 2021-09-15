@@ -15,8 +15,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
     PhotonView PV;
     const float maxHealth = 100f;
     float currentHealth = maxHealth;
+    private Vector3 moveVector;
     public GameOver GameOver;
     public GameOver GameWin;
+    public float dashSpeed;
+    public float dashTime;
+    public float cooldown;
+    private float lastDashed = -9999f;
+    public Image hb;
+    public GameObject ui;
 
     void Awake()
     {
@@ -35,6 +42,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(ui);
         }
     }
 
@@ -56,9 +64,20 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
         float vertical = Input.GetAxis("Vertical");
         float threed = Input.GetAxis("threed");
 
-        Vector3 moveVector = (transform.right * horizontal) + (transform.forward * vertical) + (transform.up * threed);
+        moveVector = (transform.right * horizontal) + (transform.forward * vertical) + (transform.up * threed);
 
         CC.Move(moveVector * movementSpeed * Time.deltaTime);
+    }
+
+
+    IEnumerator Dash()
+    {
+        float starT = Time.time;
+        while (Time.time < starT + dashTime)
+        {
+            CC.Move(moveVector * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     void Update()
@@ -69,6 +88,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
         //{
             Look();
             Move();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time > lastDashed + cooldown)
+            {
+                StartCoroutine(Dash());
+                lastDashed = Time.time;
+            }
+        }
         //}
     }
     public void TakeDamage(float damage)
@@ -84,6 +112,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks, IDamagable
         if (PV.IsMine)
         {
             currentHealth -= damage;
+            hb.fillAmount = currentHealth / maxHealth;
         }
         
         if(currentHealth <= 0)

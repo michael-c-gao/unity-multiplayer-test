@@ -40,7 +40,7 @@ public class Shoot : MonoBehaviourPunCallbacks
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
         {
             hit.collider.gameObject.GetComponent<IDamagable>()?.TakeDamage(damage);
-            PV2.RPC("RPC_Shoot", RpcTarget.All, hit.point); 
+            PV2.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal); 
 
             //var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
             //tracer.AddPosition(gunBarrel.transform.position);
@@ -107,14 +107,13 @@ public class Shoot : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void RPC_Shoot(Vector3 hit){
-                   var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.identity);
-                tracer.AddPosition(gunBarrel.transform.position);
-            
-            tracer.transform.position = hit;
-            GameObject impactMark = Instantiate(impact, hit, Quaternion.LookRotation(hit));
-            Destroy(tracer, 3f);
-            Destroy(impactMark, 3f);
+    void RPC_Shoot(Vector3 hit, Vector3 hitNormal){
+        var tracer = Instantiate(tracerRound, gunBarrel.transform.position, Quaternion.LookRotation(hitNormal, Vector3.up));
+        tracer.AddPosition(gunBarrel.transform.position);
+        tracer.transform.position = hit;
+        GameObject impactMark = Instantiate(impact, hit, Quaternion.LookRotation(hitNormal, Vector3.up));
+        Destroy(tracer, 3f);
+        Destroy(impactMark, 3f);
 
     }
 
@@ -125,6 +124,8 @@ public class Shoot : MonoBehaviourPunCallbacks
     {
 
         if (!PV.IsMine)
+            return;
+        if(!PV2.IsMine)
             return;
         weaponCheck(Gun.currWeapon);
         if (activeWeapon && (Time.time >= nextShot))
